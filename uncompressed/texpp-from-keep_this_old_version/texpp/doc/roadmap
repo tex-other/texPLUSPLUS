@@ -1,0 +1,12 @@
+
+- move all global symbols into the "tex" namespace, so that
+  we can use the std C++ library without name clashes.
+
+- rewrite the error handling, put in exceptions for fatal
+  ones.
+
+- turn the "tex" namespace into a class, so that only a 
+  pointer to this class remains global.
+
+- group functions into classes and give them the global
+  tex pointer as an argument.

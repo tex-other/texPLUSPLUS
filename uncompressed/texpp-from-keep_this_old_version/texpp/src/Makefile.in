@@ -1,0 +1,34 @@
+SRC = align.c alloc.c arith.c box.c boxlist.c chr.c \
+	cmd.c cond.c def.c dvi.c error.c eval.c expand.c \
+	fileio.c hyph.c math.c mathlist.c mlst-hlst.c \
+	pack.c page.c par.c print.c \
+	scan.c str.c sym.c tex.c texext.c \
+	tfm.c tok.c toklist.c
+
+OBJ = align.o alloc.o arith.o box.o boxlist.o chr.o \
+	cmd.o cond.o def.o dvi.o error.o eval.o expand.o \
+	fileio.o hyph.o math.o mathlist.o mlst-hlst.o \
+	pack.o page.o par.o print.o \
+	scan.o str.o sym.o tex.o texext.o \
+	tfm.o tok.o toklist.o
+
+EXTRA_CFLAGS = -O2 -Wall
+
+all: texpp
+
+%.o: %.c
+	${CXX} ${CFLAGS} ${EXTRA_CFLAGS} -c -o $@ $<
+
+texpp: ${OBJ}
+	${CXX} ${CFLAGS} ${OBJ} -o $@
+
+install:
+	install -m 755 texpp @prefix@/bin/texpp
+	( cd @prefix@/bin; ln -fs texpp latexpp )
+
+clean:
+	rm -f *.o 
+
+distclean: clean
+	rm -f texpp latex *.log *.dvi *.aux *.bak Makefile
+

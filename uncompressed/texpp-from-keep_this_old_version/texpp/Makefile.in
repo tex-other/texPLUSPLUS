@@ -1,0 +1,18 @@
+
+all: program
+
+program:
+	( cd src && $(MAKE) );
+
+install:
+	install -d @prefix@/bin
+	( cd src && $(MAKE) install );
+
+clean:
+	( cd src && $(MAKE) clean );
+	( cd tests && $(MAKE) clean );
+	rm -f *~
+
+distclean: clean
+	( cd src && $(MAKE) distclean );
+	rm -f Makefile config.cache config.log config.status 
